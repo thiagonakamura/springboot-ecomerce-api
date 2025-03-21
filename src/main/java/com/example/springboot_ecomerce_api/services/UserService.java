@@ -30,11 +30,7 @@ public class UserService {
 	
 	//Retrieves a user by its ID.
 	public UserEntity getOneUser(Long id) {
-		UserEntity userEntity = userRepository.findById(id).orElse(null);
-		if (userEntity == null) {
-			throw new ResourceNotFoundException(id);
-		}
-		return userEntity;
+		return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	//Saves a new user in the database.
