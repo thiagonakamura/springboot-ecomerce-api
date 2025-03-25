@@ -1,12 +1,17 @@
 package com.example.springboot_ecomerce_api.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -23,6 +28,10 @@ public class CategoryEntity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)// Auto-incremented primary key
 	private Long id;
 	private String name;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "categories")
+	private Set<ProductEntity> products = new HashSet<>();
 	
 	public CategoryEntity() {
 		
@@ -50,6 +59,10 @@ public class CategoryEntity implements Serializable{
 		this.name = name;
 	}
 
+	public Set<ProductEntity> getProducts() {
+		return products;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
