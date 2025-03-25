@@ -95,6 +95,16 @@ public class OrderEntity implements Serializable{
 	public Set<OrderItemEntity> getItems() {
 		return items;
 	}
+	
+	//method to calcluate the total for an order.
+	//the total is the sum of all the subtotals from the order items.
+	public Double getTotal() {
+		double sum = 0.0;
+		for (OrderItemEntity x : items) {
+			sum += x.getSubTotal();
+		}
+		return sum;
+	}
 
 	@Override
 	public int hashCode() {

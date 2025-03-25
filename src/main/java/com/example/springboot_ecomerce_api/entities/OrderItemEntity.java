@@ -71,6 +71,11 @@ public class OrderItemEntity implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	//method to calculate the subtotal for an order item.
+	public Double getSubTotal() {
+		return price * quantity;
+	}
 
 	@Override
 	public int hashCode() {
