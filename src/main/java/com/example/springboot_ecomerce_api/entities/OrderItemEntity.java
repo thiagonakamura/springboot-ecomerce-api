@@ -22,7 +22,7 @@ public class OrderItemEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId // Defines a composite primary key using OrderItemPK
-	private OrderItemPK id;//primary key based on order and product
+	private OrderItemPK id = new OrderItemPK();//primary key based on order and product
 	private Integer quantity;
 	private Double price;
 	
