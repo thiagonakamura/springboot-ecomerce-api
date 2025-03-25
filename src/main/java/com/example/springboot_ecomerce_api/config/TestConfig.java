@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.example.springboot_ecomerce_api.entities.CategoryEntity;
 import com.example.springboot_ecomerce_api.entities.OrderEntity;
 import com.example.springboot_ecomerce_api.entities.UserEntity;
 import com.example.springboot_ecomerce_api.enums.OrderStatus;
+import com.example.springboot_ecomerce_api.repositories.CategoryRepository;
 import com.example.springboot_ecomerce_api.repositories.OrderRepository;
 import com.example.springboot_ecomerce_api.repositories.UserRepository;
 
@@ -29,9 +31,19 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired
 	private OrderRepository OrderRepository;
 	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
 	//Method executed when the application starts.
 	@Override
 	public void run(String... args) throws Exception {
+		
+		CategoryEntity cat1 = new CategoryEntity(null, "Electronics");
+		CategoryEntity cat2 = new CategoryEntity(null, "Books");
+		CategoryEntity cat3 = new CategoryEntity(null, "Computers");
+		
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		
 		UserEntity u1 = new UserEntity(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
 		UserEntity u2 = new UserEntity(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
 	
