@@ -28,6 +28,7 @@ public class OrderEntity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)// Auto-incremented primary key
 	private Long id;
 	private Instant moment;
+	
 	private OrderStatus status;
 	
 	// Many-to-one relationship: Each order is associated with one user (client).
@@ -44,7 +45,7 @@ public class OrderEntity implements Serializable{
 		super();
 		this.id = id;
 		this.moment = moment;
-		this.status = status;
+		setStatus(status);
 		this.client = client;
 	}
 

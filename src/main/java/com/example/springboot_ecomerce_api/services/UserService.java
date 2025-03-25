@@ -23,6 +23,10 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository; 
 	
+	public UserEntity findById(Long id) {
+		return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+	}
+	
 	//Retrieves all users from the database.
 	public List<UserEntity> getAllUsers(){
 		return userRepository.findAll();
