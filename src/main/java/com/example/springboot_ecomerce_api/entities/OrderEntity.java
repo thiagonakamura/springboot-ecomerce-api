@@ -2,7 +2,9 @@ package com.example.springboot_ecomerce_api.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.example.springboot_ecomerce_api.enums.OrderStatus;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -36,6 +39,9 @@ public class OrderEntity implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private UserEntity client;
+	
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItemEntity> items = new HashSet<>();
 	
 	public OrderEntity() {
 		
@@ -79,6 +85,10 @@ public class OrderEntity implements Serializable{
 
 	public void setClient(UserEntity client) {
 		this.client = client;
+	}
+	
+	public Set<OrderItemEntity> getItems() {
+		return items;
 	}
 
 	@Override
