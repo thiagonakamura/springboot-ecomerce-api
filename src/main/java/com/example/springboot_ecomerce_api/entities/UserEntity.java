@@ -1,12 +1,17 @@
 package com.example.springboot_ecomerce_api.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -26,6 +31,12 @@ public class UserEntity implements Serializable{
 	private String email;
 	private String phone;
 	private String password;
+	
+	@JsonIgnore
+	// One-to-many relationship: A user can have multiple orders.
+	// The "client" field in the OrderEntity class establishes the relationship.
+	@OneToMany(mappedBy = "client")
+	private List<OrderEntity> orders = new ArrayList<>();
 	
 	//Default constructor required by JPA.
 	public UserEntity() {
@@ -84,6 +95,9 @@ public class UserEntity implements Serializable{
 		this.password = password;
 	}
 
+	public List<OrderEntity> getOrders() {
+		return orders;
+	}
 	
 	//Ensures entity equality is based on the unique identifier (ID).
 	@Override

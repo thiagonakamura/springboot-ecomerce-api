@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -28,6 +30,10 @@ public class OrderEntity implements Serializable{
 	private Instant moment;
 	private OrderStatus status;
 	
+	// Many-to-one relationship: Each order is associated with one user (client).
+	// The foreign key "user_id" links this order to a specific user.
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private UserEntity client;
 	
 	public OrderEntity() {
